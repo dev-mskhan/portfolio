@@ -47,7 +47,7 @@ export default function Contact() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="max-w-xl mx-auto px-4 py-10 text-center"
+      className="max-w-xl mx-auto px-4 pt-10 text-center"
     >
       <h2 className="text-2xl font-bold mb-2">Let's get in touch!</h2>
       <p className="mb-6 text-white/70">
@@ -57,13 +57,13 @@ export default function Contact() {
         <p>
           <strong>Email:</strong>{" "}
           <small className="text-blue-400 hover:underline text-lg">
-            shahzaibkhan4582@gmail.com
+            dev.mskhan@gmail.com
           </small>
         </p>
         <p>
           <strong>Phone:</strong>{" "}
           <small className="text-blue-400 text-lg hover:underline">
-            +92 309 9448622
+            +92 318 4606617
           </small>
         </p>
       </div>

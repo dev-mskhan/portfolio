@@ -6,43 +6,43 @@ import { Autoplay, Pagination } from "swiper/modules";
 const services = [
   {
     name: "Front End Development",
-    description: "Crafting responsive and dynamic user interfaces.",
+    description: "Building responsive, dynamic UIs with React.js, Redux Toolkit, Tailwind CSS, and Material UI.",
     icon: "fa-solid fa-code",
   },
   {
     name: "Back End Development",
-    description: "Building robust server-side logic and scalable APIs.",
+    description: "Creating scalable server-side solutions with Node.js, Express.js, and microservices architecture.",
     icon: "fa-solid fa-server",
   },
   {
-    name: "UI/UX",
-    description:
-      "Designing intuitive, user-friendly, and accessible digital experiences.",
-    icon: "fa-solid fa-pen-nib",
+    name: "AI & LLM Integration",
+    description: "Building agentic AI solutions — integrating LLMs, RAG pipelines, and OpenAI/HuggingFace APIs.",
+    icon: "fa-solid fa-brain",
   },
   {
-    name: "Code Quality Assurance",
-    description:
-      "Ensuring clean, maintainable code through testing and best practices.",
-    icon: "fa-solid fa-bug",
-  },
-  {
-    name: "Database Management",
-    description:
-      "Managing structured and unstructured data with efficient queries and security.",
+    name: "Database Engineering",
+    description: "Designing and managing MongoDB, PostgreSQL, Prisma, Redis, and vector databases like Pinecone.",
     icon: "fa-solid fa-database",
   },
   {
-    name: "DevOps",
-    description:
-      "Streamlining deployment and operations through automation and CI/CD pipelines.",
-    icon: "fa-brands fa-ubuntu",
+    name: "API Development",
+    description: "Building RESTful and GraphQL APIs with secure coding standards and Zod validation.",
+    icon: "fa-solid fa-network-wired",
   },
   {
-    name: "API Integration",
-    description:
-      "Connecting applications with third-party services and internal systems.",
-    icon: "fa-solid fa-network-wired",
+    name: "Real-Time Applications",
+    description: "Implementing live features with Socket.IO — chat, notifications, and live bidding systems.",
+    icon: "fa-solid fa-bolt",
+  },
+  {
+    name: "Testing & QA",
+    description: "Unit, integration, and E2E testing with Jest, Cypress, and CodeRabbit for clean, maintainable code.",
+    icon: "fa-solid fa-bug",
+  },
+  {
+    name: "DevOps & Deployment",
+    description: "Docker containerization, CI/CD pipelines, and deploying on Vercel, Netlify, Render, and AWS/GCP.",
+    icon: "fa-solid fa-rocket",
   },
 ];
 
@@ -73,13 +73,13 @@ const Services = () => {
         >
           {services.map((service) => {
             return (
-              <SwiperSlide key={service.name}>
-                <div className="w-full h-full overflow-hidden rounded-xl">
-                  <div className="glassdoor-effect p-6 flex flex-col justify-center text-center h-60 [@media(min-height:1100px)]:h-80 gap-y-2">
-                    <i className={`${service.icon} text-3xl`}></i>
-                    <h3 className="text-2xl font-semibold">{service.name}</h3>
-                    <p className="text-sm">{service.description}</p>
+              <SwiperSlide key={service.name} className="!h-auto flex">
+                <div className="w-full rounded-xl glassdoor-effect p-6 md:p-8 flex flex-col justify-between items-center text-center gap-y-3 transition-all duration-300 hover:border-purple-500/35 hover:bg-white/15 min-h-[260px] md:min-h-[280px]">
+                  <div className="flex flex-col items-center gap-y-3">
+                    <i className={`${service.icon} text-3xl text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.55)]`}></i>
+                    <h3 className="text-xl md:text-2xl font-semibold text-white/95">{service.name}</h3>
                   </div>
+                  <p className="text-xs md:text-sm text-gray-300 leading-relaxed">{service.description}</p>
                 </div>
               </SwiperSlide>
             );

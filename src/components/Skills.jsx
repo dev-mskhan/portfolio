@@ -1,12 +1,20 @@
 import { motion } from "framer-motion";
 
 const skills = [
-  { name: "ReactJS", level: 100 },
-  { name: "NextJS", level: 90 },
-  { name: "JavaScript", level: 100 },
-  { name: "NodeJS", level: 90 },
-  { name: "MySQL", level: 90 },
-  { name: "MongoDB", level: 100 },
+  { name: "React.js", level: 95 },
+  { name: "Node.js", level: 95 },
+  { name: "MongoDB", level: 90 },
+  { name: "TypeScript", level: 90 },
+  { name: "Express.js", level: 90 },
+  { name: "Tailwind CSS", level: 90 },
+  { name: "PostgreSQL", level: 90 },
+  { name: "Prisma", level: 85 },
+  { name: "Docker", level: 75 },
+  { name: "Socket.IO", level: 70 },
+  { name: "LLM / AI Integration", level: 80 },
+  { name: "Redis", level: 80 },
+  { name: "GraphQL", level: 70 },
+  { name: "Git / GitHub", level: 90 },
 ];
 
 export default function Skills() {
@@ -16,7 +24,7 @@ export default function Skills() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6 h-[250px] w-4/5 md:w-3/5 overflow-hidden overflow-y-scroll pr-4"
+      className="space-y-6 h-[300px] w-4/5 md:w-3/5 pr-4 overflow-y-scroll"
     >
       {skills.map((skill) => (
         <div key={skill.name}>
