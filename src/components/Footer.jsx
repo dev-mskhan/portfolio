@@ -15,7 +15,7 @@ export default function Footer() {
         {/* Social Media Icons */}
         <div className="flex gap-5 text-xl">
           <a
-            href="https://github.com/codezaib"
+            href="https://github.com/dev-mskhan"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition"
@@ -37,14 +37,6 @@ export default function Footer() {
             className="hover:text-white transition"
           >
             <i className="fab fa-twitter"></i>
-          </a>
-          <a
-            href="https://instagram.com/codezaib"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition"
-          >
-            <i className="fab fa-instagram"></i>
           </a>
         </div>
       </div>
