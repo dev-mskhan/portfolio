@@ -15,4 +15,4 @@ node_modules
 .next/
 .DS_Store
 .kiro
-public
+public/images/
