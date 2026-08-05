@@ -15,7 +15,7 @@ export default function Research() {
           {research.map((item) => (
             <div key={item.index} className="group relative bg-card p-6 md:p-8">
               <div className="mb-4 flex items-baseline gap-4">
-                <span className="font-mono text-3xl font-bold text-muted/80 transition-colors group-hover:text-primary">
+                <span className="font-mono text-3xl font-bold transition-colors text-primary">
                   {item.index}
                 </span>
                 <h3 className="text-lg font-semibold tracking-tight md:text-xl">{item.title}</h3>

@@ -78,6 +78,9 @@ export const projects = [
   {
     title: "AI-Powered Multi-Vendor E-Commerce Platform",
     tag: "MERN + OpenAI",
+    image: "/images/pic-6.png",
+    liveLink: "https://ai-ecommerce-six.vercel.app/",
+    github: "https://github.com/dev-mskhan/ai-ecommerce",
     description:
       "A scalable multi-vendor marketplace with role-based access (Admin, Vendor, Buyer), JWT auth, real-time order tracking via Socket.IO, and analytics dashboards. Integrated an AI product assistant using the OpenAI API for natural-language search, with hardened security (Helmet.js, rate limiting, XSS protection) and full production deployment.",
     stack: [
@@ -107,6 +110,9 @@ export const projects = [
   {
     title: "Dark Auction — Real-time Auction Platform",
     tag: "Realtime + Blockchain",
+    image: "/images/auction.avif",
+    liveLink: "https://dark-auction.vercel.app/",
+    github: "https://github.com/dev-mskhan/dark-auction",
     description:
       "A real-time auction platform with live bidding over Socket.IO, JWT access/refresh token auth, and BullMQ background queues for image processing and notifications. Integrated blockchain techniques for safe, encrypted bid-chaining, with Zod-validated environment configuration.",
     stack: [
@@ -135,6 +141,9 @@ export const projects = [
   {
     title: "AI-Powered Customer Relationship Management",
     tag: "Agentic AI + RAG",
+    image: "/images/crm.avif",
+    liveLink: "https://ai-crm.vercel.app/",
+    github: "https://github.com/dev-mskhan/ai-crm",
     description:
       "A full-stack CRM featuring a Kanban deal pipeline, real-time interaction timeline, and a suite of AI capabilities: lead scoring, deal forecasting, sentiment analysis, and automated email drafting — powered by HuggingFace embeddings, Ollama, and Groq.",
     stack: [
