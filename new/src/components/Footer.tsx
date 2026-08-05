@@ -4,7 +4,7 @@ import { profile, education } from "../data";
 
 export default function Footer() {
   return (
-    <footer className="mx-auto max-w-6xl px-4 py-8 md:px-8">
+    <footer className="mx-auto max-w-7xl px-4 py-8 md:px-8">
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="font-mono text-xs text-muted-foreground">
           &copy; {new Date().getFullYear()} {profile.name}.

@@ -37,11 +37,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div>
             <SectionHeading
-              index="// 04"
+              index="// 06"
               title="Let's build something"
               subtitle="Have a project, role, or research collaboration in mind? Send a message — it lands straight in my inbox."
             />

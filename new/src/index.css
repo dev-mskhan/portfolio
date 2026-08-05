@@ -28,6 +28,28 @@
   --color-accent-foreground: #ededed;
 }
 
+/* Light theme (toggled via .light on <html>) */
+html.light {
+  --color-background: #fafaf9;
+  --color-foreground: #171717;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #171717;
+
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #57534e;
+
+  --color-border: #e7e5e4;
+  --color-input: #ffffff;
+  --color-ring: #a5763c;
+
+  --color-primary: #a5763c;
+  --color-primary-foreground: #ffffff;
+
+  --color-accent: #f5f0e8;
+  --color-accent-foreground: #171717;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
