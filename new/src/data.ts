@@ -2,7 +2,7 @@ export const profile = {
   name: "Muhammad Shahzaib",
   role: "Full Stack Developer | MERN & Agentic AI",
   roleClient: "I build web apps & AI tools that ship fast and scale",
-  roleHirer: "Full Stack Developer · MERN · Agentic AI",
+  roleHirer: "Full Stack Developer, MERN, Agentic AI",
   stats: [
     { value: "3+", label: "Production Apps" },
     { value: "MERN + AI", label: "Core Stack" },
@@ -11,7 +11,7 @@ export const profile = {
   location: "Multan, Pakistan",
   email: "dev.mskhan@gmail.com",
   phone: "0318 4606617",
-  summaryClient: "I build fast, reliable web apps and AI-powered tools that solve real problems — from customer-facing products to internal systems.",
+  summaryClient: "I build fast, reliable web apps and AI-powered tools that solve real problems, from customer-facing products to internal systems.",
   summaryHirer: "Full-stack across the whole picture: React/Node, agentic AI pipelines, real-time systems, and production deployment on AWS, Docker, and Vercel.",
   resume: "/cv.docx",
   links: {
@@ -83,6 +83,7 @@ export const skillGroups = [
 
 export const projects = [
   {
+    slug: "ai-multi-vendor-marketplace",
     title: "AI-Powered Multi-Vendor E-Commerce Platform",
     tag: "MERN + OpenAI",
     image: "/images/pic-6.png",
@@ -117,7 +118,8 @@ export const projects = [
     },
   },
   {
-    title: "Dark Auction — Real-time Auction Platform",
+    slug: "dark-auction",
+    title: "Dark Auction: Real-time Auction Platform",
     tag: "Realtime + Blockchain",
     image: "/images/auction.avif",
     liveLink: "https://dark-auction.vercel.app/",
@@ -150,6 +152,7 @@ export const projects = [
     },
   },
   {
+    slug: "ai-powered-crm",
     title: "AI-Powered Customer Relationship Management",
     tag: "Agentic AI + RAG",
     image: "/images/crm.avif",
@@ -158,7 +161,7 @@ export const projects = [
     outcome:
       "A full-stack CRM with Kanban pipelines, AI lead scoring, and automated email drafting.",
     description:
-      "A full-stack CRM featuring a Kanban deal pipeline, real-time interaction timeline, and a suite of AI capabilities: lead scoring, deal forecasting, sentiment analysis, and automated email drafting — powered by HuggingFace embeddings, Ollama, and Groq.",
+      "A full-stack CRM featuring a Kanban deal pipeline, real-time interaction timeline, and a suite of AI capabilities: lead scoring, deal forecasting, sentiment analysis, and automated email drafting, powered by HuggingFace embeddings, Ollama, and Groq.",
     stack: [
       "React",
       "Node",
@@ -188,7 +191,7 @@ export const posts = [
   {
     title: "Why your business website takes 5+ seconds to load (and how to fix it)",
     description:
-      "A practical breakdown of what slows small-business sites down — bloated templates, unoptimized images, too many plugins — and the quick wins that get you back under a second.",
+      "A practical breakdown of what slows small-business sites down (bloated templates, unoptimized images, too many plugins) and the quick wins that get you back under a second.",
     tags: ["Speed", "Small Business", "Performance"],
     url: "https://medium.com",
   },
@@ -209,7 +212,7 @@ export const posts = [
   {
     title: "How much should a small business website cost?",
     description:
-      "A transparent walkthrough of what actually drives website pricing — scope, copy, integrations, maintenance — and the questions to ask before you sign a proposal.",
+      "A transparent walkthrough of what actually drives website pricing: scope, copy, integrations, maintenance, and the questions to ask before you sign a proposal.",
     tags: ["Pricing", "Small Business", "Hiring a Developer"],
     url: "https://medium.com",
   },
@@ -221,16 +224,16 @@ export const calendar = {
 };
 
 export const showreel = {
-  id: "YOUR_LOOM_VIDEO_ID",
+  id: "",
   title: "Demo",
   subtitle:
-    "A walkthrough of recent builds — how they work, what they solve, and the decisions behind them.",
+    "A walkthrough of recent builds, how they work, what they solve, and the decisions behind them.",
 };
 
 export const education = {
   degree: "BS in Information Technology",
   school: "Bahauddin Zakariya University, Multan",
-  period: "2023 — 2027",
+  period: "2023-2027",
 };
 
 export const services: Array<{ title: string; desc: string; icon: string }> = [
@@ -251,7 +254,7 @@ export const services: Array<{ title: string; desc: string; icon: string }> = [
   },
   {
     title: "Performance & Scaling",
-    desc: "Caching, Docker, CI/CD — built to handle production load",
+    desc: "Caching, Docker, and CI/CD built to handle production load",
     icon: "Zap",
   },
 ];
@@ -260,7 +263,7 @@ export const workProcess: Array<{ step: string; title: string; desc: string }> =
   {
     step: "01",
     title: "Understand",
-    desc: "I start by understanding what you're building and why — not just the spec.",
+    desc: "I start by understanding what you're building and why, not just the spec.",
   },
   {
     step: "02",

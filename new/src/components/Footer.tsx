@@ -4,33 +4,26 @@ import { profile, education } from "../data";
 
 export default function Footer() {
   return (
-    <footer className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-      <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-        <div className="font-mono text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} {profile.name}.
-        </div>
-        <div className="flex items-center gap-3">
-          <a
-            href={`mailto:${profile.email}`}
-            aria-label="Email"
-            className="flex h-10 w-10 items-center justify-center border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <Mail size={18} />
-          </a>
-          <a
-            href={profile.links.github}
-            aria-label="GitHub"
-            className="flex h-10 w-10 items-center justify-center border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <GithubIcon size={18} />
-          </a>
-          <a
-            href={profile.links.linkedin}
-            aria-label="LinkedIn"
-            className="flex h-10 w-10 items-center justify-center border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <LinkedinIcon size={18} />
-          </a>
+    <footer className="content-section">
+      <div className="page-width site-footer">
+        <div className="footer-main">
+          <div>
+            <p className="footer-copy">&copy; {new Date().getFullYear()} {profile.name}.</p>
+            <p className="footer-education">
+              {education.degree}, {education.school}, {education.period}
+            </p>
+          </div>
+          <div className="footer-socials">
+            <a href={`mailto:${profile.email}`} aria-label="Email">
+              <Mail size={17} aria-hidden="true" />
+            </a>
+            <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <GithubIcon size={17} />
+            </a>
+            <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <LinkedinIcon size={17} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

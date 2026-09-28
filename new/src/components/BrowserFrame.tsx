@@ -1,46 +1,52 @@
-const DOTS = [
-  { label: "close", color: "#ff5f57" },
-  { label: "minimize", color: "#febc2e" },
-  { label: "maximize", color: "#28c840" },
-];
+import { useState } from "react";
+import { ImageOff } from "lucide-react";
 
 export default function BrowserFrame({
   src,
   alt,
+  fallbackTitle,
+  fallbackLabel,
   ratio = "",
   className = "",
+  priority = false,
 }: {
   src: string;
   alt: string;
+  fallbackTitle?: string;
+  fallbackLabel?: string;
   ratio?: string;
   className?: string;
+  priority?: boolean;
 }) {
+  const [imageFailed, setImageFailed] = useState(false);
+
   return (
-    <div
-      className={`relative w-full overflow-hidden bg-muted ${ratio} ${className}`}
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        onError={(e) => {
-          e.currentTarget.style.display = "none";
-        }}
-        className="absolute inset-0 h-full w-full object-cover object-top"
-      />
-      <div
-        className="absolute inset-x-0 top-0 z-10 flex h-7 items-center gap-2 px-3"
-        style={{ backgroundColor: "#1a1a1a" }}
-      >
-        {DOTS.map((dot) => (
-          <span
-            key={dot.label}
-            aria-hidden="true"
-            className="h-2 w-2 rounded-full"
-            style={{ backgroundColor: dot.color }}
-          />
-        ))}
-      </div>
+    <div className={`relative w-full overflow-hidden bg-muted ${ratio} ${className}`}>
+      {!imageFailed && (
+        <img
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          draggable={false}
+          onError={() => setImageFailed(true)}
+          className="absolute inset-0 h-full w-full object-cover object-top"
+        />
+      )}
+      {imageFailed && (
+        <div
+          role="img"
+          aria-label={fallbackTitle ? `${fallbackTitle} project artwork` : alt}
+          className="project-preview-fallback absolute inset-0 grid place-items-center px-6 text-center"
+        >
+          <div className="project-preview-fallback-content">
+            <ImageOff size={20} strokeWidth={1.5} aria-hidden="true" />
+            {fallbackLabel && <span>{fallbackLabel}</span>}
+            {fallbackTitle && <strong>{fallbackTitle}</strong>}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

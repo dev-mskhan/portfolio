@@ -1,96 +1,98 @@
-import { useEffect, useState } from "react"
-import { Menu, Moon, Sun, X } from "lucide-react"
-import { useTheme } from "../hooks/useTheme"
+import { useState } from "react";
+import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "../hooks/useTheme";
+import { profile, showreel } from "../data";
 
 const links = [
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
   { label: "Work", href: "#work" },
+  { label: "Services", href: "#services" },
+  { label: "Skills", href: "#skills" },
   { label: "Demo", href: "#demo" },
   { label: "Writing", href: "#research" },
   { label: "Contact", href: "#contact" },
-]
+];
 
-export default function Nav() {
-  const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [theme, setTheme] = useTheme()
+export default function Nav({ projectPage = false }: { projectPage?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useTheme();
+  const visibleLinks = links.filter(
+    (link) => link.href !== "#demo" || Boolean(showreel.id),
+  );
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16)
-    onScroll()
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  function closeMenu() {
+    setOpen(false);
+  }
+
+  function homeHref(href: string) {
+    return projectPage ? `/${href}` : href;
+  }
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-colors ${
-        scrolled ? "border-border bg-background/90 backdrop-blur" : "border-transparent bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
-        <a href="#" className="flex items-center gap-2 font-mono text-sm font-bold tracking-tight">
-          <span className="flex h-7 w-7 items-center justify-center bg-primary text-primary-foreground">MS</span>
+    <header className="site-nav-shell">
+      <nav
+        className="site-nav"
+        aria-label="Main navigation"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") closeMenu();
+        }}
+      >
+        <a href={homeHref("#about")} className="nav-brand" onClick={closeMenu}>
+          <span className="nav-monogram" aria-hidden="true">MS</span>
           <span className="hidden sm:inline">shahzaib.dev</span>
         </a>
 
-        <ul className="hidden items-center gap-6 md:flex">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="font-mono text-sm text-muted-foreground transition-colors hover:text-primary"
-              >
-                {l.label}
-              </a>
+        <ul className="nav-links nav-desktop-links">
+          {visibleLinks.map((link) => (
+            <li key={link.href}>
+              <a href={homeHref(link.href)} onClick={closeMenu}>{link.label}</a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
+        <div className="nav-controls">
           <button
+            type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-            className="flex h-9 w-9 items-center justify-center border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            className="nav-icon-button"
           >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === "dark" ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
           </button>
-
+          <button
+            type="button"
+            className="nav-icon-button nav-menu-button"
+            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+          >
+            {open ? <X size={19} aria-hidden="true" /> : <Menu size={19} aria-hidden="true" />}
+          </button>
           <a
-            href="#contact"
-            className="hidden border border-primary bg-primary px-4 py-2 font-mono text-xs font-semibold text-primary-foreground transition-colors hover:bg-transparent hover:text-primary md:inline-block"
+            className="nav-desktop-cta"
+            href={homeHref("#contact")}
+            onClick={closeMenu}
           >
             Get in touch
+            <ArrowUpRight size={15} aria-hidden="true" />
           </a>
-
-          <button
-            className="text-foreground md:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
         </div>
+
+        <ul id="mobile-navigation" className="nav-mobile-links" data-open={open}>
+          {visibleLinks.map((link) => (
+            <li key={link.href}>
+              <a href={homeHref(link.href)} onClick={closeMenu}>{link.label}</a>
+            </li>
+          ))}
+          <li className="nav-mobile-action">
+            <a className="nav-mobile-cta" href={profile.resume} download onClick={closeMenu}>
+              Download resume
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </li>
+        </ul>
       </nav>
-
-      {open && (
-        <div className="border-t border-border bg-background md:hidden">
-          <ul className="flex flex-col px-4 py-2">
-            {links.map((l) => (
-              <li key={l.href} className="border-b border-border last:border-b-0">
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 font-mono text-sm text-muted-foreground hover:text-primary"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </header>
-  )
+  );
 }

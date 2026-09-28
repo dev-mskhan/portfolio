@@ -1,20 +1,21 @@
 import { useState, type FormEvent } from "react";
-import { Send, Loader2, CheckCircle2, AlertTriangle } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import { profile } from "../data";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
     const data = new FormData(form);
 
     setStatus("submitting");
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -25,126 +26,88 @@ export default function Contact() {
         }),
       });
 
-      if (!res.ok) throw new Error("Web3Forms request failed");
+      if (!response.ok) throw new Error("Web3Forms request failed");
 
       setStatus("success");
       form.reset();
-    } catch (err) {
-      console.error("Web3Forms error:", err);
+    } catch (error) {
+      console.error("Web3Forms error:", error);
       setStatus("error");
     }
   }
 
   return (
-    <section id="contact" className="border-b border-border">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr]">
+    <section id="contact" className="content-section">
+      <div className="page-width section-space">
+        <div className="contact-layout">
           <div>
             <SectionHeading
-              index="// 06"
               title="Let's build something"
-              subtitle="Have a project, role, or research collaboration in mind? Send a message — it lands straight in my inbox."
+              subtitle="Have a project, role, or research collaboration in mind? Send a message and it lands straight in my inbox."
             />
-            <div className="space-y-3 font-mono text-sm text-muted-foreground">
-              <p>
-                <span className="text-primary">email</span> &rarr;
-                dev.mskhan@gmail.com
-              </p>
-              <p>
-                <span className="text-primary">phone</span> &rarr; 0318 4606617
-              </p>
-              <p>
-                <span className="text-primary">based</span> &rarr; Multan,
-                Pakistan
-              </p>
+            <div className="contact-details">
+              <p><span>EMAIL</span>{profile.email}</p>
+              <p><span>PHONE</span>{profile.phone}</p>
+              <p><span>BASED</span>{profile.location}</p>
             </div>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="border border-border bg-card p-6 md:p-8"
-          >
-            <div className="grid grid-cols-1 gap-5">
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="name"
-                  className="font-mono text-xs text-muted-foreground"
-                >
-                  NAME
-                </label>
-                <input
-                  id="name"
-                  name="Name"
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  className="border border-border bg-input px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="email"
-                  className="font-mono text-xs text-muted-foreground"
-                >
-                  EMAIL
-                </label>
-                <input
-                  id="email"
-                  name="Email"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  className="border border-border bg-input px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="message"
-                  className="font-mono text-xs text-muted-foreground"
-                >
-                  MESSAGE
-                </label>
-                <textarea
-                  id="message"
-                  name="Message"
-                  required
-                  rows={5}
-                  placeholder="Tell me about your project..."
-                  className="resize-none border border-border bg-input px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="inline-flex items-center justify-center gap-2 border border-primary bg-primary px-5 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-transparent hover:text-primary disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {status === "submitting" ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" /> Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} /> Send message
-                  </>
-                )}
-              </button>
-
-              {status === "success" && (
-                <p className="inline-flex items-center gap-2 border border-primary bg-muted px-4 py-3 font-mono text-xs text-primary">
-                  <CheckCircle2 size={15} /> Message sent — thanks for reaching
-                  out!
-                </p>
-              )}
-              {status === "error" && (
-                <p className="inline-flex items-center gap-2 border border-border bg-muted px-4 py-3 font-mono text-xs text-muted-foreground">
-                  <AlertTriangle size={15} className="text-primary" /> Something
-                  went wrong. Email me directly instead.
-                </p>
-              )}
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="form-field">
+              <label htmlFor="name">NAME</label>
+              <input
+                id="name"
+                name="Name"
+                type="text"
+                autoComplete="name"
+                required
+                placeholder="Your name"
+              />
             </div>
+
+            <div className="form-field">
+              <label htmlFor="email">EMAIL</label>
+              <input
+                id="email"
+                name="Email"
+                type="email"
+                autoComplete="email"
+                required
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="message">MESSAGE</label>
+              <textarea
+                id="message"
+                name="Message"
+                required
+                rows={5}
+                placeholder="Tell me about your project..."
+              />
+            </div>
+
+            <button type="submit" disabled={status === "submitting"} className="button button-primary w-fit">
+              {status === "submitting" ? (
+                <><Loader2 size={16} className="animate-spin" aria-hidden="true" /> Sending...</>
+              ) : (
+                <>Send message <span className="button-arrow" aria-hidden="true"><Send size={14} /></span></>
+              )}
+            </button>
+
+            {status === "success" && (
+              <p className="form-status form-status-success" role="status">
+                <CheckCircle2 size={15} className="mr-1 inline" aria-hidden="true" />
+                Message sent, thanks for reaching out!
+              </p>
+            )}
+            {status === "error" && (
+              <p className="form-status form-status-error" role="alert">
+                <AlertTriangle size={15} className="mr-1 inline" aria-hidden="true" />
+                Something went wrong. Email me directly instead.
+              </p>
+            )}
           </form>
         </div>
       </div>
