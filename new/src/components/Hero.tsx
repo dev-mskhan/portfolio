@@ -52,6 +52,7 @@ export default function Hero() {
                 fetchPriority="high"
                 decoding="async"
                 draggable={false}
+                loading="lazy"
               />
             </div>
           </div>
