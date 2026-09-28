@@ -9,10 +9,9 @@ __v0_jsx-dev-runtime.ts
 # Environment variables
 .env
 .env*.local
-
+dist/
 # Common ignores
 node_modules
 .next/
 .DS_Store
 .kiro
-public/images/
