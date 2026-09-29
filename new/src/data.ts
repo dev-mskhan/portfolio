@@ -87,6 +87,7 @@ export const projects = [
     title: "AI-Powered Multi-Vendor E-Commerce Platform",
     tag: "MERN + OpenAI",
     image: "/images/pic-6.png",
+    video: "/videos/file_example_WEBM_480_900KB.webm",
     liveLink: "https://ai-ecommerce-six.vercel.app/",
     github: "https://github.com/dev-mskhan/ai-ecommerce",
     outcome:
@@ -122,6 +123,7 @@ export const projects = [
     title: "Dark Auction: Real-time Auction Platform",
     tag: "Realtime + Blockchain",
     image: "/images/auction.avif",
+    video: undefined,
     liveLink: "https://dark-auction.vercel.app/",
     github: "https://github.com/dev-mskhan/dark-auction",
     outcome:
@@ -156,6 +158,7 @@ export const projects = [
     title: "AI-Powered Customer Relationship Management",
     tag: "Agentic AI + RAG",
     image: "/images/crm.avif",
+    video: undefined,
     liveLink: "https://ai-crm.vercel.app/",
     github: "https://github.com/dev-mskhan/ai-crm",
     outcome:
@@ -225,7 +228,7 @@ export const calendar = {
 
 export const showreel = {
   id: "",
-  title: "Demo",
+  title: "Portfolio video",
   subtitle:
     "A walkthrough of recent builds, how they work, what they solve, and the decisions behind them.",
 };
@@ -235,6 +238,14 @@ export const education = {
   school: "Bahauddin Zakariya University, Multan",
   period: "2023-2027",
 };
+
+export const experiences = [
+  {
+    role: "Backend AI Engineer Intern",
+    company: "FLyRankAI",
+    period: "July 2026 – August 2026",
+  },
+];
 
 export const services: Array<{ title: string; desc: string; icon: string }> = [
   {

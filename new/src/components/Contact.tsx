@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { track } from "@vercel/analytics";
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { profile } from "../data";
@@ -29,6 +30,7 @@ export default function Contact() {
       if (!response.ok) throw new Error("Web3Forms request failed");
 
       setStatus("success");
+      track("contact_form_success");
       form.reset();
     } catch (error) {
       console.error("Web3Forms error:", error);
@@ -40,7 +42,7 @@ export default function Contact() {
     <section id="contact" className="content-section">
       <div className="page-width section-space">
         <div className="contact-layout">
-          <div>
+          <div data-scroll-reveal>
             <SectionHeading
               title="Let's build something"
               subtitle="Have a project, role, or research collaboration in mind? Send a message and it lands straight in my inbox."
@@ -52,7 +54,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form onSubmit={handleSubmit} className="contact-form" data-scroll-reveal>
             <div className="form-field">
               <label htmlFor="name">NAME</label>
               <input

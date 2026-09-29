@@ -13,7 +13,7 @@ export default function Research() {
 
         <div className="writing-list">
           {posts.map((post) => (
-            <article key={post.title} className="writing-item">
+            <article key={post.title} className="writing-item" data-scroll-reveal>
               <h3>{post.title}</h3>
               <p>{post.description}</p>
               <ul className="writing-tags" aria-label="Topics">

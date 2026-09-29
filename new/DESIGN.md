@@ -19,7 +19,7 @@ colors:
 typography:
   display:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(3.4rem, 6.15vw, 6.2rem)"
+    fontSize: "clamp(3rem, 5vw, 5.25rem)"
     fontWeight: 570
     lineHeight: 0.91
     letterSpacing: "-0.075em"
@@ -67,23 +67,26 @@ components:
 
 The portfolio gives real project imagery the first word, then supports it with concise, scannable context. Its visual language pairs ink-green surfaces and mineral-lime accents with spacious typography and carefully framed screenshots. The tone is direct and technically grounded, without invented proof or decorative interface chrome.
 
-The site supports both dark and light themes with the same hierarchy and accent role. The dark palette is the default; the light palette uses pale green neutrals and a deeper forest accent for contrast.
+The site supports dark and light modes across four selectable colorways: Forest, Ocean, Plum, and Amber. Each colorway assigns semantic roles for backgrounds, raised surfaces, borders, text, and primary actions so the visual system follows the selection across every section.
 
 **Key Characteristics:**
-- Project-first compositions with a moderate-size alternating gallery immediately after the hero.
+- Project-first compositions with a moderate-size alternating gallery immediately after the hero, followed by a concise work-experience timeline.
 - Dedicated, directly addressable detail pages for each project, with clear return and adjacent-project navigation.
 - A compact portfolio guide that answers from existing project and profile content; it is a local frontend preview, not a connected AI service.
-- Restrained green accent, used consistently across both themes.
+- One restrained, high-contrast accent per selected colorway, used consistently across the whole page.
 - Compact page container, restrained section rhythm, and responsive asymmetric grids.
 - Real local previews only; unavailable project imagery uses a plain fallback.
 
 ## Colors
 
-The palette uses layered green-charcoal neutrals, a pale mineral accent in dark mode, and a deeper forest accent in light mode.
+The Forest colorway preserves the original green-charcoal and pale mineral accents in dark mode, with pale green surfaces and a deeper forest accent in light mode. Ocean, Plum, and Amber offer parallel dark and light ramps without changing semantic token roles.
 
 ### Primary
 - **Mineral Lime** (#c3df8c): Dark-theme primary actions and emphasis.
 - **Forest Accent** (#4d6637): Light-theme primary actions and emphasis.
+- **Ocean** (#91bfe3 dark / #2d607e light): Blue-gray accent.
+- **Plum** (#c5a3dc dark / #704b86 light): Muted violet accent.
+- **Amber** (#e1bf78 dark / #77551d light): Warm gold accent.
 
 ### Neutral
 - **Ink** (#111512): Dark-theme page background.
@@ -108,15 +111,15 @@ The palette uses layered green-charcoal neutrals, a pale mineral accent in dark 
 **Character:** Geist keeps large headings contemporary and compact, while JetBrains Mono is reserved for technical role labels and stack details.
 
 ### Hierarchy
-- **Display** (570, clamp(3.4rem, 6.15vw, 6.2rem), 0.91): Hero name, with balanced wrapping.
-- **Headline** (580, clamp(2.25rem, 5vw, 4.5rem), 0.99): Section titles.
+- **Display** (570, clamp(3rem, 5vw, 5.25rem), 0.91): Hero name, with balanced wrapping.
+- **Headline** (580, clamp(1.8rem, 3.5vw, 3rem), 0.99): Section titles.
 - **Title** (550-600, 0.95-2.5rem, 1.1-1.35): Project and content titles.
 - **Body** (400, 0.84-1.2rem, 1.55-1.7): Descriptions and supporting copy.
 - **Label** (400-500, 0.67-0.72rem): Technical labels and project stack details.
 
 ## Layout
 
-The main content sits in a centered container capped at 76rem, with gutters that grow from 1.25rem on small screens to 5vw on wide screens. The hero uses an asymmetric text-and-art split with portrait-framed project imagery on the active page theme, then collapses to a single column below 768px. Project stories alternate image and text sides on desktop, then stack image-first on narrow screens. Skills use compact icon-led category rows; writing uses a restrained two-column desktop layout. Services and process use four columns that reduce to two or one on mobile. Section spacing is intentionally compact, with the project gallery and writing sections tighter than the hero and contact areas.
+The main content sits in a centered container capped at 76rem, with gutters that grow from 1.25rem on small screens to 5vw on wide screens. The hero uses an asymmetric text-and-art split with portrait-framed project imagery on the active page theme, then collapses to a single column below 768px. Project stories alternate image and text sides on desktop, then stack image-first on narrow screens. A concise vertical timeline follows the project gallery. Skills use compact icon-led category rows with the video centered below them; writing uses a restrained two-column desktop layout. Services and process use four columns that reduce to two or one on mobile. Section spacing is intentionally compact, with the project gallery and writing sections tighter than the hero and contact areas. Scroll reveals are one-shot and respect reduced-motion preferences.
 
 ## Elevation & Depth
 
@@ -152,10 +155,10 @@ Interactive buttons and circular icon controls use pill or circle shapes. Fields
 - **Error / Disabled:** Inline form status; submit action is disabled during submission.
 
 ### Navigation
-- A detached, rounded navigation surface uses a single desktop row, compact text links, a contact action, and a theme control. On narrow screens, the links and resume action move into a full-width expandable menu; the theme toggle remains visible.
+- A detached, rounded navigation surface uses a single desktop row with only the primary Work, Experience, Skills, and Contact links, a palette selector, a light/dark control, and a resume download action. The active section is indicated while scrolling. On narrow screens, the links and resume action move into a full-width expandable menu; both theme controls remain visible.
 
 ### Project Artwork
-- Genuine project screenshots are presented in a rounded frame, with a themed title-and-category fallback when an asset is unavailable. The hero stays simple with the profile portrait and direct actions. A subdued OGL particle layer spans the non-hero sections and follows the current theme; the hero's opaque theme surface keeps that layer out of the hero. The supplied OGL MicroSlats effect remains beneath the hero alone with a transparent background, theme-aware ambient slats, and the same lime pointer highlight in both themes. Both effects respect reduced motion and pause when offscreen.
+- Genuine project screenshots are presented in a rounded frame, with a themed title-and-category fallback when an asset is unavailable. Project walkthrough video belongs to its project detail, not the home-page gallery, to protect first-load performance. The hero portrait is preloaded and served as a compressed JPEG. A subdued OGL particle layer spans the non-hero sections and follows the current theme; the hero's opaque theme surface keeps that layer out of the hero. The supplied OGL MicroSlats effect remains beneath the hero alone with a transparent background and reads the selected accent. Both effects follow colorway changes, respect reduced motion, and pause when offscreen.
 
 ### Project Details and Portfolio Guide
 - Project gallery links open dedicated `/work/<slug>` detail pages. Each page preserves the project's existing overview, challenge, approach, highlights, and stack, then links back to the work section and neighboring projects.
@@ -165,7 +168,7 @@ Interactive buttons and circular icon controls use pill or circle shapes. Fields
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the mineral/forest accent consistent between actions, focus states, and emphasis.
+- **Do** keep the selected palette's accent consistent between actions, focus states, and emphasis.
 - **Do** lead with genuine project work and preserve each project's own case-study details.
 - **Do** keep labels and descriptions readable in dark and light themes.
 - **Do** keep the hero motion bounded and disable it for reduced-motion preferences.

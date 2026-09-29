@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { skillGroups, education } from "../data";
+import Showreel from "./Showreel";
 
 const groupIcons: Record<string, LucideIcon> = {
   "Frameworks & Libraries": Code2,
@@ -33,7 +34,7 @@ export default function Skills() {
             const Icon = groupIcons[group.label] ?? Code2;
 
             return (
-              <div className="skill-row" key={group.label}>
+              <div className="skill-row" data-scroll-reveal key={group.label}>
                 <Icon className="skill-row-icon" size={17} aria-hidden="true" />
                 <h3>{group.label}</h3>
                 <ul className="skill-list">
@@ -44,12 +45,16 @@ export default function Skills() {
           })}
         </div>
 
-        <div className="education-line">
+        <div className="education-line" data-scroll-reveal>
           <p>
             <strong>{education.degree}</strong>
             {", "}{education.school}
             {", "}{education.period}
           </p>
+        </div>
+
+        <div className="skills-video" data-scroll-reveal>
+          <Showreel />
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@ export default function Services() {
           {services.map((service) => {
             const Icon = iconMap[service.icon];
             return (
-              <article className="service-item" key={service.title}>
+              <article className="service-item" data-scroll-reveal key={service.title}>
                 {Icon && <Icon size={19} strokeWidth={1.7} aria-hidden="true" />}
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>

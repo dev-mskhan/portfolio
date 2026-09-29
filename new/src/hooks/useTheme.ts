@@ -15,7 +15,14 @@ export function useTheme() {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("light", theme === "light");
+    root.dataset.theme = theme;
     window.localStorage.setItem("theme", theme);
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute(
+        "content",
+        getComputedStyle(root).getPropertyValue("--color-background").trim(),
+      );
   }, [theme]);
 
   return [theme, setTheme] as const;

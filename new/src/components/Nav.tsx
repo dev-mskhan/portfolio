@@ -1,24 +1,45 @@
-import { useState } from "react";
-import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { track } from "@vercel/analytics";
+import { Download, Menu, Moon, Palette as PaletteIcon, Sun, X } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
-import { profile, showreel } from "../data";
+import { palettes, usePalette } from "../hooks/usePalette";
+import { profile } from "../data";
 
 const links = [
-  { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
+  { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
-  { label: "Demo", href: "#demo" },
-  { label: "Writing", href: "#research" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Nav({ projectPage = false }: { projectPage?: boolean }) {
   const [open, setOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const [theme, setTheme] = useTheme();
-  const visibleLinks = links.filter(
-    (link) => link.href !== "#demo" || Boolean(showreel.id),
-  );
+  const [palette, setPalette] = usePalette();
+
+  useEffect(() => {
+    if (projectPage || !("IntersectionObserver" in window)) return;
+
+    const sections = links
+      .map(({ href }) => document.querySelector<HTMLElement>(href))
+      .filter((section): section is HTMLElement => section !== null);
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(`#${visible.target.id}`);
+      },
+      { rootMargin: "-25% 0px -60% 0px", threshold: [0, 0.1, 0.25, 0.5] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [projectPage]);
 
   function closeMenu() {
     setOpen(false);
@@ -34,7 +55,10 @@ export default function Nav({ projectPage = false }: { projectPage?: boolean }) 
         className="site-nav"
         aria-label="Main navigation"
         onKeyDown={(event) => {
-          if (event.key === "Escape") closeMenu();
+          if (event.key === "Escape") {
+            closeMenu();
+            setPaletteOpen(false);
+          }
         }}
       >
         <a href={homeHref("#about")} className="nav-brand" onClick={closeMenu}>
@@ -43,14 +67,31 @@ export default function Nav({ projectPage = false }: { projectPage?: boolean }) 
         </a>
 
         <ul className="nav-links nav-desktop-links">
-          {visibleLinks.map((link) => (
+          {links.map((link) => (
             <li key={link.href}>
-              <a href={homeHref(link.href)} onClick={closeMenu}>{link.label}</a>
+              <a
+                href={homeHref(link.href)}
+                onClick={closeMenu}
+                className={activeSection === link.href ? "is-active" : undefined}
+                aria-current={activeSection === link.href ? "location" : undefined}
+              >
+                {link.label}
+              </a>
             </li>
           ))}
         </ul>
 
         <div className="nav-controls">
+          <button
+            type="button"
+            onClick={() => setPaletteOpen((value) => !value)}
+            aria-label="Choose color theme"
+            aria-expanded={paletteOpen}
+            aria-controls="palette-menu"
+            className="nav-icon-button palette-toggle"
+          >
+            <PaletteIcon size={17} aria-hidden="true" />
+          </button>
           <button
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -71,24 +112,74 @@ export default function Nav({ projectPage = false }: { projectPage?: boolean }) 
           </button>
           <a
             className="nav-desktop-cta"
-            href={homeHref("#contact")}
-            onClick={closeMenu}
+            href={profile.resume}
+            download
+            onClick={() => {
+              track("resume_download");
+              closeMenu();
+            }}
           >
-            Get in touch
-            <ArrowUpRight size={15} aria-hidden="true" />
+            Download resume
+            <Download size={15} aria-hidden="true" />
           </a>
         </div>
 
+        <div
+          id="palette-menu"
+          className="palette-menu"
+          data-open={paletteOpen}
+          aria-label="Color themes"
+        >
+          <p>Color theme</p>
+          <div className="palette-options">
+            {palettes.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                className="palette-option"
+                onClick={() => {
+                  setPalette(option.id);
+                  setPaletteOpen(false);
+                }}
+                aria-label={`${option.label} color theme`}
+                aria-pressed={palette === option.id}
+              >
+                <span
+                  className="palette-swatch"
+                  style={{ backgroundColor: option.color }}
+                  aria-hidden="true"
+                />
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <ul id="mobile-navigation" className="nav-mobile-links" data-open={open}>
-          {visibleLinks.map((link) => (
+          {links.map((link) => (
             <li key={link.href}>
-              <a href={homeHref(link.href)} onClick={closeMenu}>{link.label}</a>
+              <a
+                href={homeHref(link.href)}
+                onClick={closeMenu}
+                className={activeSection === link.href ? "is-active" : undefined}
+                aria-current={activeSection === link.href ? "location" : undefined}
+              >
+                {link.label}
+              </a>
             </li>
           ))}
           <li className="nav-mobile-action">
-            <a className="nav-mobile-cta" href={profile.resume} download onClick={closeMenu}>
+            <a
+              className="nav-mobile-cta"
+              href={profile.resume}
+              download
+              onClick={() => {
+                track("resume_download");
+                closeMenu();
+              }}
+            >
               Download resume
-              <ArrowUpRight size={16} aria-hidden="true" />
+              <Download size={16} aria-hidden="true" />
             </a>
           </li>
         </ul>

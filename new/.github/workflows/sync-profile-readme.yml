@@ -1,0 +1,69 @@
+name: Sync profile README
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-profile-readme
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate profile README from portfolio data
+        run: pnpm profile:readme
+
+      - name: Verify publishing token exists
+        env:
+          PROFILE_README_TOKEN: ${{ secrets.PROFILE_README_TOKEN }}
+        run: |
+          if [ -z "$PROFILE_README_TOKEN" ]; then
+            echo "::error::Add a PROFILE_README_TOKEN Actions secret with contents write access to dev-mskhan/dev-mskhan."
+            exit 1
+          fi
+
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+        with:
+          repository: dev-mskhan/dev-mskhan
+          ref: main
+          token: ${{ secrets.PROFILE_README_TOKEN }}
+          path: profile-repository
+
+      - name: Publish updated profile README
+        working-directory: profile-repository
+        run: |
+          cp ../profile-readme/README.md README.md
+          if git diff --quiet -- README.md; then
+            echo "Profile README is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: sync profile README from portfolio"
+          git push origin main

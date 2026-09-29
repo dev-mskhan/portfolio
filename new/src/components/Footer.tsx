@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="content-section">
       <div className="page-width site-footer">
-        <div className="footer-main">
+        <div className="footer-main" data-scroll-reveal>
           <div>
             <p className="footer-copy">&copy; {new Date().getFullYear()} {profile.name}.</p>
             <p className="footer-education">

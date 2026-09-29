@@ -1,5 +1,7 @@
 import { ArrowLeft, ArrowUpRight, ExternalLink, GitBranch } from "lucide-react";
+import { track } from "@vercel/analytics";
 import BrowserFrame from "./BrowserFrame";
+import ProjectVideo from "./ProjectVideo";
 import { projects } from "../data";
 
 type Project = (typeof projects)[number];
@@ -37,7 +39,7 @@ export default function ProjectDetail({ project }: { project?: Project }) {
         All projects
       </a>
 
-      <header className="project-page-heading">
+      <header className="project-page-heading" data-scroll-reveal>
         <p className="project-page-category">{project.tag}</p>
         <h1>{project.title}</h1>
         <p className="project-page-outcome">{project.outcome}</p>
@@ -47,6 +49,7 @@ export default function ProjectDetail({ project }: { project?: Project }) {
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("project_external_click", { project: project.slug, destination: "live" })}
           >
             Visit live project
             <span className="button-arrow" aria-hidden="true">
@@ -58,6 +61,7 @@ export default function ProjectDetail({ project }: { project?: Project }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("project_external_click", { project: project.slug, destination: "source" })}
           >
             View source
             <span className="button-arrow" aria-hidden="true">
@@ -67,19 +71,27 @@ export default function ProjectDetail({ project }: { project?: Project }) {
         </div>
       </header>
 
-      <div className="project-detail-art">
-        <BrowserFrame
-          src={project.image}
-          alt={`${project.title} project preview`}
-          fallbackTitle={project.title}
-          fallbackLabel={project.tag}
-          priority
-          className="h-full"
+      {project.video ? (
+        <ProjectVideo
+          src={project.video}
+          poster={project.image}
+          title={project.title}
         />
-      </div>
+      ) : (
+        <div className="project-detail-art" data-scroll-reveal>
+          <BrowserFrame
+            src={project.image}
+            alt={`${project.title} project preview`}
+            fallbackTitle={project.title}
+            fallbackLabel={project.tag}
+            priority
+            className="h-full"
+          />
+        </div>
+      )}
 
       <div className="project-detail-grid">
-        <section className="project-detail-intro">
+        <section className="project-detail-intro" data-scroll-reveal>
           <h2>Overview</h2>
           <p>{project.description}</p>
           <ul className="project-detail-stack" aria-label="Technology stack">
@@ -90,15 +102,15 @@ export default function ProjectDetail({ project }: { project?: Project }) {
         </section>
 
         <div className="project-detail-study">
-          <section aria-labelledby="project-challenge">
+          <section data-scroll-reveal aria-labelledby="project-challenge">
             <h2 id="project-challenge">The challenge</h2>
             <p>{project.caseStudy?.challenge}</p>
           </section>
-          <section aria-labelledby="project-approach">
+          <section data-scroll-reveal aria-labelledby="project-approach">
             <h2 id="project-approach">The approach</h2>
             <p>{project.caseStudy?.approach}</p>
           </section>
-          <section aria-labelledby="project-highlights">
+          <section data-scroll-reveal aria-labelledby="project-highlights">
             <h2 id="project-highlights">Highlights</h2>
             <ul>
               {project.caseStudy?.highlights.map((highlight) => (
@@ -109,7 +121,7 @@ export default function ProjectDetail({ project }: { project?: Project }) {
         </div>
       </div>
 
-      <nav className="project-pagination" aria-label="Other projects">
+      <nav className="project-pagination" data-scroll-reveal aria-label="Other projects">
         {previous ? (
           <a href={`/work/${previous.slug}`}>
             <span>Previous project</span>

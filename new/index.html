@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/portfolio.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#111512" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,6 +16,25 @@
       content="Muhammad Shahzaib, Full Stack Developer specializing in MERN and Agentic AI systems. Building intelligent, production-grade software."
     />
     <title>Muhammad Shahzaib, Full Stack &amp; Agentic AI Developer</title>
+    <script>
+      const storedTheme = localStorage.getItem("theme");
+      const storedPalette = localStorage.getItem("palette");
+      if (storedTheme === "light") document.documentElement.classList.add("light");
+      if (storedTheme === "light" || storedTheme === "dark") {
+        document.documentElement.dataset.theme = storedTheme;
+      }
+      if (["forest", "ocean", "plum", "amber"].includes(storedPalette)) {
+        document.documentElement.dataset.palette = storedPalette;
+      }
+      if (window.location.pathname === "/") {
+        const portrait = document.createElement("link");
+        portrait.rel = "preload";
+        portrait.as = "image";
+        portrait.href = "/images/profile-pic.jpg";
+        portrait.setAttribute("fetchpriority", "high");
+        document.head.append(portrait);
+      }
+    </script>
   </head>
   <body>
     <!--

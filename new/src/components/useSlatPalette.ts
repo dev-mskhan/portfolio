@@ -6,13 +6,12 @@ export type SlatPalette = {
   backgroundColor: string;
 };
 
+const FALLBACK_ACCENT = "#c3df8c";
 const DARK_PALETTE: SlatPalette = {
-  color: "#c3df8c",
-  glintColor: "#c3df8c",
+  color: FALLBACK_ACCENT,
+  glintColor: FALLBACK_ACCENT,
   backgroundColor: "transparent",
 };
-
-const LIGHT_ACCENT_FALLBACK = "#4d6637";
 
 function isConcreteColor(value: string) {
   return (
@@ -25,18 +24,13 @@ function getSlatPalette(): SlatPalette {
   if (typeof document === "undefined") return DARK_PALETTE;
 
   const root = document.documentElement;
-  const isLight =
-    root.classList.contains("light") || root.dataset.theme === "light";
-
-  if (!isLight) return DARK_PALETTE;
-
   const accent = getComputedStyle(root)
     .getPropertyValue("--color-primary")
     .trim();
 
   return {
-    color: isConcreteColor(accent) ? accent : LIGHT_ACCENT_FALLBACK,
-    glintColor: DARK_PALETTE.glintColor,
+    color: isConcreteColor(accent) ? accent : DARK_PALETTE.color,
+    glintColor: isConcreteColor(accent) ? accent : DARK_PALETTE.glintColor,
     backgroundColor: "transparent",
   };
 }
@@ -52,7 +46,7 @@ export function useSlatPalette() {
 
     observer.observe(root, {
       attributes: true,
-      attributeFilter: ["class", "data-theme"],
+      attributeFilter: ["class", "data-theme", "data-palette"],
     });
     setPalette(getSlatPalette());
 

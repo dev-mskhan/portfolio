@@ -11,7 +11,7 @@ export default function Process() {
         />
         <ol className="process-list">
           {workProcess.map((item) => (
-            <li className="process-item" key={item.step}>
+            <li className="process-item" data-scroll-reveal key={item.step}>
               <span>{item.step}</span>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>

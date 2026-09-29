@@ -21,10 +21,10 @@ function getParticlePalette(): ParticlePalette {
   if (typeof document === "undefined") return DARK_FALLBACK;
 
   const root = document.documentElement;
-  const isLight =
-    root.classList.contains("light") || root.dataset.theme === "light";
   const styles = getComputedStyle(root);
   const accent = readHexColor(styles, "--color-primary", LIGHT_FALLBACK_ACCENT);
+  const isLight =
+    root.classList.contains("light") || root.dataset.theme === "light";
 
   if (isLight) {
     return {
@@ -35,7 +35,7 @@ function getParticlePalette(): ParticlePalette {
 
   return {
     particleColors: [
-      readHexColor(styles, "--color-primary", DARK_FALLBACK.particleColors[0]),
+      accent,
       readHexColor(styles, "--color-foreground", DARK_FALLBACK.particleColors[1]),
     ],
     alphaParticles: false,
@@ -53,7 +53,7 @@ export function useParticlePalette() {
 
     observer.observe(root, {
       attributes: true,
-      attributeFilter: ["class", "data-theme"],
+      attributeFilter: ["class", "data-theme", "data-palette"],
     });
     setPalette(getParticlePalette());
 

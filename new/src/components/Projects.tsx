@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { ArrowUpRight, ExternalLink, GitBranch } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeading from "./SectionHeading";
@@ -51,6 +52,7 @@ export default function Projects() {
         className="project-art-shell"
         aria-label={`Read the ${project.title} case study`}
         data-project-artwork
+        onClick={() => track("project_case_study_click", { project: project.slug })}
       >
         <BrowserFrame
           src={project.image}
@@ -62,30 +64,47 @@ export default function Projects() {
         />
       </a>
 
-      <div className="project-content">
+      <div className="project-content" data-scroll-reveal>
         <p className="project-eyebrow">{project.tag}</p>
         <h3>
           <a href={`/work/${project.slug}`}>{project.title}</a>
         </h3>
         <p className="project-outcome">{project.outcome}</p>
-        <p className="project-description">{project.description}</p>
-
         <ul className="project-stack" aria-label="Technology stack">
-          {project.stack.map((technology) => (
+          {project.stack.slice(0, 4).map((technology) => (
             <li key={technology}>{technology}</li>
           ))}
+          {project.stack.length > 4 && (
+            <li className="project-stack-more">+{project.stack.length - 4}</li>
+          )}
         </ul>
 
         <div className="project-actions">
-          <a className="project-read-link" href={`/work/${project.slug}`}>
+          <a
+            className="project-read-link"
+            href={`/work/${project.slug}`}
+            onClick={() => track("project_case_study_click", { project: project.slug })}
+          >
             Read case study
             <ArrowUpRight size={16} aria-hidden="true" />
           </a>
           <div className="project-source-links">
-            <a href={project.liveLink} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live demo`}>
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("project_external_click", { project: project.slug, destination: "live" })}
+              aria-label={`Open ${project.title} live demo`}
+            >
               <ExternalLink size={15} aria-hidden="true" />
             </a>
-            <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} source code`}>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("project_external_click", { project: project.slug, destination: "source" })}
+              aria-label={`View ${project.title} source code`}
+            >
               <GitBranch size={15} aria-hidden="true" />
             </a>
           </div>
