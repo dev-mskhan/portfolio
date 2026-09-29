@@ -29,6 +29,9 @@ const escapeHtml = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 
+const htmlImage = (url, alt, attributes = "") =>
+  `<img${attributes ? ` ${attributes}` : ""} src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" />`;
+
 const inlineCode = (value) => `\`${String(value).replaceAll("`", "'")}\``;
 const primaryProject = projects[0];
 const aiSkills = skillGroups.find((group) => /ai|llm/i.test(group.label))?.items ?? [];
@@ -63,7 +66,7 @@ const featuredImagePath = featuredProject?.image?.startsWith("/")
   ? featuredProject.image
   : `/${featuredProject?.image || ""}`;
 const featuredArtwork = featuredProject?.image
-  ? `<a href="${escapeHtml(featuredProject.liveLink || `${portfolioUrl}/#work`)}"><img width="100%" src="${escapeHtml(portfolioUrl + featuredImagePath)}" alt="${escapeHtml(`${featuredProject.title} preview`)}" /></a>`
+  ? `<a href="${escapeHtml(featuredProject.liveLink || `${portfolioUrl}/#work`)}">${htmlImage(portfolioUrl + featuredImagePath, `${featuredProject.title} preview`, 'width="100%"')}</a>`
   : "";
 const projectGridRows = [];
 for (let index = 0; index < otherProjects.length; index += 2) {
@@ -104,20 +107,29 @@ const educationBlock = education
   ? `**${escapeHtml(education.degree)}**<br />\n${escapeHtml(education.school)} · ${escapeHtml(education.period)}`
   : "";
 
+const bannerUrl = `https://capsule-render.vercel.app/api?type=waving&height=250&color=0:061A2B,42:0B4F6C,100:00B4D8&text=${encodeURIComponent(profile.name)}&fontColor=E6FAFF&fontSize=44&fontAlignY=38&desc=${encodeURIComponent(profile.role.toUpperCase())}&descAlignY=59&descSize=15&animation=fadeIn`;
+const typingUrl = "https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=48CAE4&center=true&vCenter=true&width=760&height=52&lines=Full-stack+products+from+interface+to+infrastructure;LLMs%2C+RAG%2C+and+agentic+AI+in+real+workflows;Thoughtful+systems+from+prototype+to+production";
+const badges = [
+  ["https://img.shields.io/badge/EXPLORE%20MY%20WORK-0B2538?style=for-the-badge&logo=vercel&logoColor=48CAE4", "Explore my portfolio", portfolioUrl],
+  ["https://img.shields.io/badge/GITHUB-12344A?style=for-the-badge&logo=github&logoColor=ADE8F4", "GitHub profile", profile.links.github],
+  ["https://img.shields.io/badge/LINKEDIN-164E63?style=for-the-badge&logo=linkedin&logoColor=ADE8F4", "LinkedIn profile", profile.links.linkedin],
+  ["https://img.shields.io/badge/LET'S%20TALK-0E7490?style=for-the-badge&logo=gmail&logoColor=E6FAFF", `Email ${profile.name}`, `mailto:${profile.email}`],
+];
+const badgeLinks = badges.map(([imageUrl, alt, destination]) => {
+  return `<a href="${escapeHtml(destination)}">${htmlImage(imageUrl, alt)}</a>`;
+}).join("\n");
+
 const readme = `<div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=250&color=0:061A2B,42:0B4F6C,100:00B4D8&text=${encodeURIComponent(profile.name)}&fontColor=E6FAFF&fontSize=44&fontAlignY=38&desc=${encodeURIComponent(profile.role.toUpperCase())}&descAlignY=59&descSize=15&animation=fadeIn" alt="Ocean-blue banner for ${escapeHtml(profile.name)}" />
+${htmlImage(bannerUrl, `Ocean-blue banner for ${profile.name}`, 'width="100%"')}
 
 <br />
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=48CAE4&center=true&vCenter=true&width=760&height=52&lines=Full-stack+products+from+interface+to+infrastructure;LLMs%2C+RAG%2C+and+agentic+AI+in+real+workflows;Thoughtful+systems+from+prototype+to+production" alt="Full-stack engineering and agentic AI" />
+${htmlImage(typingUrl, "Full-stack engineering and agentic AI")}
 
 <br />
 
-<a href="${escapeHtml(portfolioUrl)}"><img src="https://img.shields.io/badge/EXPLORE%20MY%20WORK-0B2538?style=for-the-badge&logo=vercel&logoColor=48CAE4" alt="Explore my portfolio" /></a>
-<a href="${escapeHtml(profile.links.github)}"><img src="https://img.shields.io/badge/GITHUB-12344A?style=for-the-badge&logo=github&logoColor=ADE8F4" alt="GitHub profile" /></a>
-<a href="${escapeHtml(profile.links.linkedin)}"><img src="https://img.shields.io/badge/LINKEDIN-164E63?style=for-the-badge&logo=linkedin&logoColor=ADE8F4" alt="LinkedIn profile" /></a>
-<a href="mailto:${escapeHtml(profile.email)}"><img src="https://img.shields.io/badge/LET'S%20TALK-0E7490?style=for-the-badge&logo=gmail&logoColor=E6FAFF" alt="Email ${escapeHtml(profile.name)}" /></a>
+${badgeLinks}
 
 <br />
 <br />
@@ -132,7 +144,7 @@ const readme = `<div align="center">
 <tr>
 <td width="20%" align="center" valign="middle">
 
-<img width="150" src="${escapeHtml(portfolioUrl)}/images/profile-pic.png" alt="${escapeHtml(profile.name)}" />
+${htmlImage(`${portfolioUrl}/images/profile-pic.png`, profile.name, 'width="150"')}
 
 </td>
 <td width="80%" valign="top">

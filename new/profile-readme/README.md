@@ -1,17 +1,17 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=250&color=0:061A2B,42:0B4F6C,100:00B4D8&text=Muhammad%20Shahzaib&fontColor=E6FAFF&fontSize=44&fontAlignY=38&desc=FULL%20STACK%20DEVELOPER%20%7C%20MERN%20%26%20AGENTIC%20AI&descAlignY=59&descSize=15&animation=fadeIn" alt="Ocean-blue banner for Muhammad Shahzaib" />
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&amp;height=250&amp;color=0:061A2B,42:0B4F6C,100:00B4D8&amp;text=Muhammad%20Shahzaib&amp;fontColor=E6FAFF&amp;fontSize=44&amp;fontAlignY=38&amp;desc=FULL%20STACK%20DEVELOPER%20%7C%20MERN%20%26%20AGENTIC%20AI&amp;descAlignY=59&amp;descSize=15&amp;animation=fadeIn" alt="Ocean-blue banner for Muhammad Shahzaib" />
 
 <br />
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=48CAE4&center=true&vCenter=true&width=760&height=52&lines=Full-stack+products+from+interface+to+infrastructure;LLMs%2C+RAG%2C+and+agentic+AI+in+real+workflows;Thoughtful+systems+from+prototype+to+production" alt="Full-stack engineering and agentic AI" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&amp;size=17&amp;pause=1200&amp;color=48CAE4&amp;center=true&amp;vCenter=true&amp;width=760&amp;height=52&amp;lines=Full-stack+products+from+interface+to+infrastructure;LLMs%2C+RAG%2C+and+agentic+AI+in+real+workflows;Thoughtful+systems+from+prototype+to+production" alt="Full-stack engineering and agentic AI" />
 
 <br />
 
-<a href="https://devshahzaib.vercel.app"><img src="https://img.shields.io/badge/EXPLORE%20MY%20WORK-0B2538?style=for-the-badge&logo=vercel&logoColor=48CAE4" alt="Explore my portfolio" /></a>
-<a href="https://github.com/dev-mskhan"><img src="https://img.shields.io/badge/GITHUB-12344A?style=for-the-badge&logo=github&logoColor=ADE8F4" alt="GitHub profile" /></a>
-<a href="https://linkedin.com/in/shahzaibkhan45"><img src="https://img.shields.io/badge/LINKEDIN-164E63?style=for-the-badge&logo=linkedin&logoColor=ADE8F4" alt="LinkedIn profile" /></a>
-<a href="mailto:dev.mskhan@gmail.com"><img src="https://img.shields.io/badge/LET'S%20TALK-0E7490?style=for-the-badge&logo=gmail&logoColor=E6FAFF" alt="Email Muhammad Shahzaib" /></a>
+<a href="https://devshahzaib.vercel.app"><img src="https://img.shields.io/badge/EXPLORE%20MY%20WORK-0B2538?style=for-the-badge&amp;logo=vercel&amp;logoColor=48CAE4" alt="Explore my portfolio" /></a>
+<a href="https://github.com/dev-mskhan"><img src="https://img.shields.io/badge/GITHUB-12344A?style=for-the-badge&amp;logo=github&amp;logoColor=ADE8F4" alt="GitHub profile" /></a>
+<a href="https://linkedin.com/in/shahzaibkhan45"><img src="https://img.shields.io/badge/LINKEDIN-164E63?style=for-the-badge&amp;logo=linkedin&amp;logoColor=ADE8F4" alt="LinkedIn profile" /></a>
+<a href="mailto:dev.mskhan@gmail.com"><img src="https://img.shields.io/badge/LET'S%20TALK-0E7490?style=for-the-badge&amp;logo=gmail&amp;logoColor=E6FAFF" alt="Email Muhammad Shahzaib" /></a>
 
 <br />
 <br />
