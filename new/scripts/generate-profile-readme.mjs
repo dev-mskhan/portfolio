@@ -34,7 +34,6 @@ const htmlImage = (url, alt, attributes = "") =>
   `<img${attributes ? ` ${attributes}` : ""} src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" />`;
 
 const inlineCode = (value) => `\`${String(value).replaceAll("`", "'")}\``;
-const primaryProject = projects[0];
 const aiSkills = skillGroups.find((group) => /ai|llm/i.test(group.label))?.items ?? [];
 const applicationSkills = skillGroups.find((group) => /framework|librar/i.test(group.label))?.items ?? [];
 const dataSkills = skillGroups.find((group) => /database/i.test(group.label))?.items ?? [];
@@ -108,33 +107,57 @@ const educationBlock = education
   ? `**${escapeHtml(education.degree)}**<br />\n${escapeHtml(education.school)} · ${escapeHtml(education.period)}`
   : "";
 
-const bannerSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title description">
+const bannerSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title description">
   <title id="title">${escapeHtml(profile.name)}</title>
-  <desc id="description">${escapeHtml(profile.role)}</desc>
+  <desc id="description">Ocean-blue flowing wave illustration</desc>
   <defs>
     <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#061A2B" />
-      <stop offset="0.58" stop-color="#0B4F6C" />
-      <stop offset="1" stop-color="#087E9B" />
+      <stop offset="0" stop-color="#061522" />
+      <stop offset="0.54" stop-color="#0B354B" />
+      <stop offset="1" stop-color="#075B73" />
     </linearGradient>
-    <radialGradient id="light" cx="0.82" cy="0.16" r="0.78">
-      <stop offset="0" stop-color="#48CAE4" stop-opacity="0.32" />
+    <linearGradient id="waveDeep" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0" stop-color="#0B4F6C" />
+      <stop offset="0.56" stop-color="#087E9B" />
+      <stop offset="1" stop-color="#00B4D8" />
+    </linearGradient>
+    <linearGradient id="waveLight" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#48CAE4" stop-opacity="0.42" />
+      <stop offset="0.5" stop-color="#90E0EF" stop-opacity="0.78" />
+      <stop offset="1" stop-color="#ADE8F4" stop-opacity="0.28" />
+    </linearGradient>
+    <linearGradient id="foam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ADE8F4" stop-opacity="0" />
+      <stop offset="0.52" stop-color="#ADE8F4" stop-opacity="0.8" />
+      <stop offset="1" stop-color="#ADE8F4" stop-opacity="0.12" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.76" cy="0.25" r="0.62">
+      <stop offset="0" stop-color="#48CAE4" stop-opacity="0.26" />
       <stop offset="1" stop-color="#48CAE4" stop-opacity="0" />
     </radialGradient>
+    <filter id="softGlow" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="8" />
+    </filter>
+    <clipPath id="bannerClip">
+      <rect width="1200" height="320" rx="28" />
+    </clipPath>
   </defs>
-  <rect width="1200" height="300" rx="28" fill="url(#ocean)" />
-  <rect width="1200" height="300" rx="28" fill="url(#light)" />
-  <g fill="none" stroke="#ADE8F4" stroke-opacity="0.15">
-    <path d="M0 218C174 174 264 269 438 222s264-47 438 0 216 47 324 0" />
-    <path d="M0 244c174-44 264 51 438 4s264-47 438 0 216 47 324 0" />
-    <path d="M0 270c174-44 264 51 438 4s264-47 438 0 216 47 324 0" />
+  <g clip-path="url(#bannerClip)">
+    <rect width="1200" height="320" fill="url(#ocean)" />
+    <rect width="1200" height="320" fill="url(#glow)" />
+    <path d="M-70 235C105 105 250 112 392 185s240 123 395 43 281-157 483-88v214H-70Z" fill="#041A29" fill-opacity="0.58" />
+    <path d="M-60 276C106 150 241 154 390 215s239 102 393 22 286-135 487-56v195H-60Z" fill="url(#waveDeep)" fill-opacity="0.9" />
+    <path d="M-60 305c169-111 301-105 454-55s225 84 383 7 301-108 493-34v125H-60Z" fill="url(#waveLight)" fill-opacity="0.68" />
+    <path d="M-40 322c167-91 294-88 444-43s236 65 391 2 317-91 499-32v96H-40Z" fill="#061A2B" fill-opacity="0.55" />
+    <path d="M-25 273c160-115 279-120 430-68s242 90 403 13 269-122 422-72" fill="none" stroke="#ADE8F4" stroke-opacity="0.26" stroke-width="2" />
+    <path d="M-35 291c163-102 279-104 431-55s241 74 396 8 292-104 432-53" fill="none" stroke="url(#foam)" stroke-width="3" filter="url(#softGlow)" />
+    <path d="M-35 291c163-102 279-104 431-55s241 74 396 8 292-104 432-53" fill="none" stroke="url(#foam)" stroke-width="1.2" />
+    <path d="M-40 306c172-75 286-72 433-31s235 53 389 1 278-76 432-34" fill="none" stroke="#ADE8F4" stroke-opacity="0.28" stroke-width="1" />
+    <circle cx="1000" cy="80" r="2" fill="#ADE8F4" fill-opacity="0.78" />
+    <circle cx="1051" cy="115" r="1.5" fill="#ADE8F4" fill-opacity="0.5" />
+    <circle cx="1095" cy="64" r="1.4" fill="#ADE8F4" fill-opacity="0.6" />
+    <text x="600" y="128" text-anchor="middle" fill="#E6FAFF" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="58" font-weight="700" letter-spacing="-1.8">${escapeHtml(profile.name)}</text>
   </g>
-  <circle cx="1040" cy="82" r="3" fill="#ADE8F4" fill-opacity="0.8" />
-  <circle cx="1080" cy="112" r="2" fill="#ADE8F4" fill-opacity="0.58" />
-  <circle cx="1000" cy="132" r="2" fill="#ADE8F4" fill-opacity="0.48" />
-  <text x="78" y="133" fill="#E6FAFF" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="58" font-weight="700" letter-spacing="-1.8">${escapeHtml(profile.name)}</text>
-  <text x="82" y="178" fill="#ADE8F4" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="19" font-weight="500" letter-spacing="2">${escapeHtml(profile.role.toUpperCase())}</text>
-  <text x="82" y="226" fill="#E6FAFF" fill-opacity="0.76" font-family="Consolas,monospace" font-size="13" letter-spacing="1.3">${escapeHtml(profile.location.toUpperCase())}  /  MERN + TYPESCRIPT  /  AGENTIC AI</text>
 </svg>
 `;
 const typingUrl = "https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=48CAE4&center=true&vCenter=true&width=760&height=52&lines=Full-stack+products+from+interface+to+infrastructure;LLMs%2C+RAG%2C+and+agentic+AI+in+real+workflows;Thoughtful+systems+from+prototype+to+production";
@@ -163,7 +186,7 @@ ${badgeLinks}
 <br />
 <br />
 
-\`${escapeHtml(profile.location).toUpperCase()}\` &nbsp; / &nbsp; \`MERN + TYPESCRIPT\` &nbsp; / &nbsp; \`AGENTIC AI\`
+\`MERN + PYTHON\` &nbsp; / &nbsp; \`TYPESCRIPT\` &nbsp; / &nbsp; \`AGENTIC AI\`
 
 </div>
 

@@ -16,7 +16,7 @@
 <br />
 <br />
 
-`MULTAN, PAKISTAN` &nbsp; / &nbsp; `MERN + TYPESCRIPT` &nbsp; / &nbsp; `AGENTIC AI`
+`MERN + PYTHON` &nbsp; / &nbsp; `TYPESCRIPT` &nbsp; / &nbsp; `AGENTIC AI`
 
 </div>
 
