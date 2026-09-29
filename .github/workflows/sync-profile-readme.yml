@@ -30,12 +30,13 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+          cache-dependency-path: new/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm --dir new install --frozen-lockfile
 
       - name: Generate profile README from portfolio data
-        run: pnpm profile:readme
+        run: pnpm --dir new profile:readme
 
       - name: Verify publishing token exists
         env:
@@ -57,7 +58,7 @@ jobs:
       - name: Publish updated profile README
         working-directory: profile-repository
         run: |
-          cp ../profile-readme/README.md README.md
+          cp ../new/profile-readme/README.md README.md
           if git diff --quiet -- README.md; then
             echo "Profile README is already up to date."
             exit 0

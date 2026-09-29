@@ -1,0 +1,1 @@
+The portfolio application is in `new/`. When changing profile facts, skills, projects, project links, experience, or education in `new/src/data.ts`, run `pnpm --dir new profile:readme` and commit the generated `new/profile-readme/README.md` with related changes. See `new/AGENTS.md` and root `AGENTS.md` for the profile repository publishing setup.
