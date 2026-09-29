@@ -6,6 +6,7 @@ import ts from "typescript";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const sourcePath = resolve(root, "src/data.ts");
 const outputPath = resolve(root, "profile-readme/README.md");
+const bannerOutputPath = resolve(root, "profile-readme/assets/profile-banner.svg");
 const portfolioUrl = (process.env.PORTFOLIO_URL || "https://devshahzaib.vercel.app").replace(/\/+$/, "");
 
 const source = await readFile(sourcePath, "utf8");
@@ -107,7 +108,35 @@ const educationBlock = education
   ? `**${escapeHtml(education.degree)}**<br />\n${escapeHtml(education.school)} · ${escapeHtml(education.period)}`
   : "";
 
-const bannerUrl = `https://capsule-render.vercel.app/api?type=waving&height=250&color=0:061A2B,42:0B4F6C,100:00B4D8&text=${encodeURIComponent(profile.name)}&fontColor=E6FAFF&fontSize=44&fontAlignY=38&desc=${encodeURIComponent(profile.role.toUpperCase())}&descAlignY=59&descSize=15&animation=fadeIn`;
+const bannerSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title description">
+  <title id="title">${escapeHtml(profile.name)}</title>
+  <desc id="description">${escapeHtml(profile.role)}</desc>
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061A2B" />
+      <stop offset="0.58" stop-color="#0B4F6C" />
+      <stop offset="1" stop-color="#087E9B" />
+    </linearGradient>
+    <radialGradient id="light" cx="0.82" cy="0.16" r="0.78">
+      <stop offset="0" stop-color="#48CAE4" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#48CAE4" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="300" rx="28" fill="url(#ocean)" />
+  <rect width="1200" height="300" rx="28" fill="url(#light)" />
+  <g fill="none" stroke="#ADE8F4" stroke-opacity="0.15">
+    <path d="M0 218C174 174 264 269 438 222s264-47 438 0 216 47 324 0" />
+    <path d="M0 244c174-44 264 51 438 4s264-47 438 0 216 47 324 0" />
+    <path d="M0 270c174-44 264 51 438 4s264-47 438 0 216 47 324 0" />
+  </g>
+  <circle cx="1040" cy="82" r="3" fill="#ADE8F4" fill-opacity="0.8" />
+  <circle cx="1080" cy="112" r="2" fill="#ADE8F4" fill-opacity="0.58" />
+  <circle cx="1000" cy="132" r="2" fill="#ADE8F4" fill-opacity="0.48" />
+  <text x="78" y="133" fill="#E6FAFF" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="58" font-weight="700" letter-spacing="-1.8">${escapeHtml(profile.name)}</text>
+  <text x="82" y="178" fill="#ADE8F4" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="19" font-weight="500" letter-spacing="2">${escapeHtml(profile.role.toUpperCase())}</text>
+  <text x="82" y="226" fill="#E6FAFF" fill-opacity="0.76" font-family="Consolas,monospace" font-size="13" letter-spacing="1.3">${escapeHtml(profile.location.toUpperCase())}  /  MERN + TYPESCRIPT  /  AGENTIC AI</text>
+</svg>
+`;
 const typingUrl = "https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=48CAE4&center=true&vCenter=true&width=760&height=52&lines=Full-stack+products+from+interface+to+infrastructure;LLMs%2C+RAG%2C+and+agentic+AI+in+real+workflows;Thoughtful+systems+from+prototype+to+production";
 const badges = [
   ["https://img.shields.io/badge/EXPLORE%20MY%20WORK-0B2538?style=for-the-badge&logo=vercel&logoColor=48CAE4", "Explore my portfolio", portfolioUrl],
@@ -121,7 +150,7 @@ const badgeLinks = badges.map(([imageUrl, alt, destination]) => {
 
 const readme = `<div align="center">
 
-${htmlImage(bannerUrl, `Ocean-blue banner for ${profile.name}`, 'width="100%"')}
+${htmlImage("./assets/profile-banner.svg", `Ocean-blue banner for ${profile.name}`, 'width="100%"')}
 
 <br />
 
@@ -238,5 +267,8 @@ I’m open to **remote roles, internships, and contract work**.
 `;
 
 await mkdir(dirname(outputPath), { recursive: true });
+await mkdir(dirname(bannerOutputPath), { recursive: true });
 await writeFile(outputPath, readme, "utf8");
+await writeFile(bannerOutputPath, bannerSvg, "utf8");
 console.log(`Generated ${outputPath}`);
+console.log(`Generated ${bannerOutputPath}`);

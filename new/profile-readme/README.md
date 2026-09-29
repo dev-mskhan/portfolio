@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&amp;height=250&amp;color=0:061A2B,42:0B4F6C,100:00B4D8&amp;text=Muhammad%20Shahzaib&amp;fontColor=E6FAFF&amp;fontSize=44&amp;fontAlignY=38&amp;desc=FULL%20STACK%20DEVELOPER%20%7C%20MERN%20%26%20AGENTIC%20AI&amp;descAlignY=59&amp;descSize=15&amp;animation=fadeIn" alt="Ocean-blue banner for Muhammad Shahzaib" />
+<img width="100%" src="./assets/profile-banner.svg" alt="Ocean-blue banner for Muhammad Shahzaib" />
 
 <br />
 
